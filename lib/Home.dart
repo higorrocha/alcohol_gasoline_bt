@@ -32,7 +32,13 @@ class _HomeState extends State<Home> {
           _textResult = "Use Alcohol! It's better now.";
         });
       }
+      _cleanField();
     }
+  }
+
+  void _cleanField(){
+    _controllerAlcohol.text = "";
+    _controllerGasoline.text = "";
   }
 
   @override
