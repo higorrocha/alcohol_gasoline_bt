@@ -11,6 +11,29 @@ class _HomeState extends State<Home> {
 
   TextEditingController _controllerAlcohol = TextEditingController();
   TextEditingController _controllerGasoline = TextEditingController();
+  String _textResult = "";
+
+  void _calculate(){
+
+    double? priceAlcohol = double.tryParse( _controllerAlcohol.text );
+    double? priceGasoline = double.tryParse( _controllerGasoline.text);
+
+    if( priceAlcohol == null || priceGasoline == null){
+      setState(() {
+        _textResult = "Invalid number! Type number greater then zero and use dotted (.) ";
+      });
+    }else{
+      if((priceAlcohol / priceGasoline) >= 0.7){
+        setState(() {
+          _textResult = "Use Gasoline! It's better now.";
+        });
+      }else{
+        setState(() {
+          _textResult = "Use Alcohol! It's better now.";
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,13 +102,13 @@ class _HomeState extends State<Home> {
                         fontSize: 18
                     ),
                   ),
-                  onPressed: (){},
+                  onPressed: _calculate,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 15),
                 child: Text(
-                  "Result",
+                  _textResult,
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
